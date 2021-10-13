@@ -7,12 +7,14 @@ import (
 	"io/fs"
 	"log"
 	"os"
+
+	"golang.org/x/oauth2"
 )
 
 const ConfigFilename = "follow-liked.json"
 
 type Config struct {
-	SpotifyAuthToken string
+	Auth oauth2.Token
 }
 
 func main() {
@@ -23,7 +25,7 @@ func main() {
 		log.Fatalf("Error %v", err)
 	}
 
-	if len(config.SpotifyAuthToken) == 0 {
+	if len(config.Auth.AccessToken) == 0 {
 		log.Println("Before using this tool, you must authenticate with Spotify.")
 	}
 
